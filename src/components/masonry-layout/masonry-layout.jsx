@@ -60,7 +60,6 @@ export default function MasonryLayout({
     }
 
     function resize(containerWidth) {
-        console.log("resize", containerWidth);
         const newWidth = containerWidth / numColumns;
         const newSizes = data.items.map((entry) => {
             const item = { ...entry.image };
