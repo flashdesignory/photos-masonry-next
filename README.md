@@ -2,6 +2,14 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Preview
+
+https://photos-masonry.netlify.app/
+
+## Status
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/20e29aaf-b390-47be-9c35-89c45c55c7bc/deploy-status)](https://app.netlify.com/sites/photos-masonry/deploys)
+
 ## Getting Started
 
 First, run the development server:
