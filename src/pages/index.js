@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import data from "public/data/surf.json";
+import data from "public/data/unsplash.json";
 import Page from "@/partials/page/page"
 import MasonryLayout from "@/components/masonry-layout/masonry-layout";
 

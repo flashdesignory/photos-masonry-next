@@ -12,7 +12,6 @@ export default function MasonryLayout({
     data = { items: [] },
     numColumns = 3,
 }) {
-
     function rebuild() {
         const columns = [];
         // create an array for each column
@@ -37,11 +36,12 @@ export default function MasonryLayout({
     }
 
     const [sizes, setSizes] = useState(
-        data.items.map(() => ({
-            width: 0,
-            height: 0,
-        }))
+       data.items.reduce(((accumulator, item) => {
+        accumulator[item.id] = {width: 0, height: 0};
+        return accumulator;
+       }), {})
     );
+
     const [containerWidth, setContainerWidth] = useState(-1);
     const { elementRef, disconnect } = useResizeObserver({
         callback: useThrottle(handleOnResize, 0),
@@ -65,10 +65,14 @@ export default function MasonryLayout({
             const item = { ...entry.image };
             item.height = getNewHeight(item.width, item.height, newWidth);
             item.width = newWidth;
+            item.id = entry.id;
             return item;
         });
         
-        setSizes(newSizes);
+        setSizes(newSizes.reduce(((accumulator, item) => {
+            accumulator[item.id] = {width: item.width, height: item.height}
+            return accumulator;
+        }), {}));
     }
 
     return (
@@ -77,7 +81,7 @@ export default function MasonryLayout({
                 {columns.map((column, index) => {
                     return (
                         <div key={`masonry-column-${index}`} className={styles["masonry-column"]}>
-                         {column.map((item) => <ImageDisplay key={item.id} data={item} width={sizes[index].width} height={sizes[index].height} containerStyles={customStyles}/>)}
+                         {column.map((item) => <ImageDisplay key={item.id} data={item} width={sizes[item.id].width} height={sizes[item.id].height} containerStyles={customStyles}/>)}
                         </div>
                     )
                 })}
